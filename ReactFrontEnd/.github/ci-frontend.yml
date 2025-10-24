@@ -1,0 +1,25 @@
+name: CI Frontend
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'ReactFrontEnd/**' ]
+  pull_request:
+    branches: [ main ]
+    paths: [ 'ReactFrontEnd/**' ]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - working-directory: ./ReactFrontEnd
+        run: npm ci
+      - working-directory: ./ReactFrontEnd
+        name: Run Tests
+        run: npm test
+      - working-directory: ./ReactFrontEnd
+        name: Build
+        run: npm run build
