@@ -2,10 +2,10 @@ name: CI Frontend
 on:
   push:
     branches: [ main ]
-    paths: [ 'ReactFrontEnd/**' ]
+    paths: [ 'ReactFrontEnd/**', '.github/workflows/**' ]
   pull_request:
     branches: [ main ]
-    paths: [ 'ReactFrontEnd/**' ]
+    paths: [ 'ReactFrontEnd/**', '.github/workflows/**' ]
 jobs:
   build-and-test:
     runs-on: ubuntu-latest

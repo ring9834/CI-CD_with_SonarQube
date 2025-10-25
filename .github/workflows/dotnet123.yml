@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
-    paths: [ 'BackEnd/**' ]
+    paths: [ 'BackEnd/**', '.github/workflows/**' ]
   pull_request:
     branches: [ main ]
-    paths: [ 'BackEnd/**' ]
+    paths: [ 'BackEnd/**', '.github/workflows/**' ]
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
