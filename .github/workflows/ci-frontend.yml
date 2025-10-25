@@ -43,4 +43,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           github-comment: false  # Add this to disable comments
           vercel-args: '--prod'
-          working-directory: .
+          working-directory: . # use . as the root directory because we only select the ReactFrontEnd folder for deployment to Vercel from the Github repo
