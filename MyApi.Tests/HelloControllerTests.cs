@@ -14,7 +14,7 @@ namespace MyApi.Tests
             Assert.NotNull(result);
             var value = result.Value as dynamic;
             Assert.NotNull(value);
-            //Assert.Equal("Hello from .NET API!", value?.message);
+            //Assert.Equal("Hello from .NET API!", value?.message); 
         }
     }
 }
