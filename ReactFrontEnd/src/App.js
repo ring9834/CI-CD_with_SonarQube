@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   const [data, setData] = useState(null);
   useEffect(() => {
-    fetch('https://your-render-api.onrender.com/api/hello')
+    fetch('https://cicd-react-dotnet-1.onrender.com/api/hello')
       .then(res => res.json())
       .then(data => setData(data.message))
       .catch(err => console.error(err));
