@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ main ]
     paths: [ 'ReactFrontEnd/**', '.github/workflows/**' ]
+permissions:
+  contents: read
+  pull-requests: write    # Add this
+  deployments: write      # Add this
+  statuses: write         # Add this
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
