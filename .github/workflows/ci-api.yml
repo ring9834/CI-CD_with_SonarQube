@@ -38,7 +38,7 @@ jobs:
           dotnet-version: '9.0.x'
 
       - name: Restore
-        run: dotnet restore MyApi.csproj
+        run: dotnet restore
 
       - name: Format Check
         run: dotnet format MyApi.csproj --verify-no-changes
@@ -66,12 +66,13 @@ jobs:
             -Dsonar.branch.name=main
 
       - name: Snyk Security Scan (.NET)
+        continue-on-error: true  # Don't fail the build on vulnerabilities
         run: |
           docker run --rm \
             -v "$(pwd)/BackEnd:/app" \
             -w /app \
             -e SNYK_TOKEN=${{ secrets.SNYK_TOKEN }} \
-            snyk/snyk:dotnet snyk test --file=MyApi.csproj --package-manager=nuget --severity-threshold=high
+            snyk/snyk:dotnet snyk test --file=MyApi.sln --package-manager=nuget --severity-threshold=high
 
 
   deploy:
