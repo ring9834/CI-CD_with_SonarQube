@@ -70,7 +70,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --file=BackEnd/MyApi.csproj --severity-threshold=high
+          args: --file=MyApi.csproj --severity-threshold=high
 
   deploy:
     needs: build-and-test
