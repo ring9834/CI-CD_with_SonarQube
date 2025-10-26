@@ -29,6 +29,7 @@ jobs:
       - name: Build
         run: npm run build
   quality-security-scan:
+    needs: build-and-test
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -66,7 +67,7 @@ jobs:
         with:
           args: --file=./ReactFrontEnd/package.json --severity-threshold=high --prune-repeated-subdependencies --exit-code=0
   deploy:
-    needs: [build-and-test, quality-security-scan]
+    needs: quality-security-scan
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
