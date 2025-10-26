@@ -44,10 +44,10 @@ jobs:
         run: dotnet format --verify-no-changes
 
       - name: Build
-        run: dotnet build --no-restore -c Release
+        run: dotnet build MyApi.csproj --no-restore -c Release
 
       - name: Test with Coverage
-        run: dotnet test --no-build --collect:"XPlat Code Coverage" --results-directory ./coverage
+        run: dotnet test MyApi.csproj --no-build --collect:"XPlat Code Coverage" --results-directory ./coverage
 
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v4
