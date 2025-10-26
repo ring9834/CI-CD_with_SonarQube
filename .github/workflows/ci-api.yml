@@ -67,12 +67,12 @@ jobs:
             -Dsonar.branch.name=main
 
       - name: Snyk Security Scan
-        uses: snyk/actions/dotnet@master
+        uses: snyk/actions@master
         continue-on-error: true  # Don't fail the build on vulnerabilities
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --file=BackEnd/MyApi.csproj --package-manager=nuget --severity-threshold=high
+          args: --file=BackEnd/MyApi.csproj --package-manager=nuget --project-name=MyApi --severity-threshold=high
 
       # - name: Snyk Security Scan (.NET)
       #   continue-on-error: true  # Don't fail the build on vulnerabilities
