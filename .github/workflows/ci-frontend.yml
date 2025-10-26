@@ -1,16 +1,16 @@
 name: CI Frontend
 on:
   push:
-    branches: [ main ]
+    branches: [ main , develop]
     paths: [ 'ReactFrontEnd/**', '.github/workflows/**' ]
   pull_request:
-    branches: [ main ]
+    branches: [ main , develop]
     paths: [ 'ReactFrontEnd/**', '.github/workflows/**' ]
 permissions:
   contents: read
-  pull-requests: write    # Add this
-  deployments: write      # Add this
-  statuses: write         # Add this
+  pull-requests: write 
+  deployments: write 
+  statuses: write 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -28,6 +28,37 @@ jobs:
       - working-directory: ./ReactFrontEnd
         name: Build
         run: npm run build
+  quality-security-scan:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ReactFrontEnd
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install
+        run: npm ci
+      - name: Format Check
+        run: npm run format -- --check
+      - name: Lint
+        run: npm run lint
+      - name: Test with Coverage
+        run: npm test -- --coverage
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Snyk Security Scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
@@ -44,3 +75,4 @@ jobs:
           github-comment: false  # Add this to disable comments
           vercel-args: '--prod'
           working-directory: . # use . as the root directory because we only select the ReactFrontEnd folder for deployment to Vercel from the Github repo
+  

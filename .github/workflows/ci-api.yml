@@ -1,10 +1,10 @@
 name: CI API
 on:
   push:
-    branches: [ main ]
+    branches: [ main , develop]
     paths: [ 'BackEnd/**' , '.github/workflows/**']
   pull_request:
-    branches: [ main ]
+    branches: [ main , develop]
     paths: [ 'BackEnd/**' , '.github/workflows/**']
 jobs:
   build-and-test:
@@ -24,6 +24,46 @@ jobs:
       - working-directory: ./BackEnd
         name: Test
         run: dotnet test --no-build --verbosity normal
+  quality:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./BackEnd
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Format Check
+        run: dotnet format --verify-no-changes
+
+      - name: Build
+        run: dotnet build --no-restore -c Release
+
+      - name: Test with Coverage
+        run: dotnet test --no-build --collect:"XPlat Code Coverage" --results-directory ./coverage
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./api/MyApi/coverage/**/coverage.opencover.xml
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Snyk Scan
+        run: |
+          curl -sSL https://raw.githubusercontent.com/snyk/actions/master/.github/workflows/snyk-dotnet.yml | \
+          docker run --rm -i -v $(pwd):/app snyk/snyk:dotnet snyk test --file=MyApi.csproj
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
