@@ -66,14 +66,13 @@ jobs:
             -Dsonar.branch.name=main
 
       - name: Snyk Security Scan (.NET)
+        uses: snyk/actions/dotnet@v1
+        with:
+          command: test
+          file: ./BackEnd/MyApi.csproj
+          severity-threshold: high
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: |
-          docker run --rm -i \
-            -v ${{ github.workspace }}:/app \
-            -w /app/BackEnd \
-            snyk/snyk:dotnet \
-            snyk test --file=MyApi.csproj --severity-threshold=high
 
   deploy:
     needs: build-and-test
