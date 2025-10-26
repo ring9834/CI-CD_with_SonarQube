@@ -66,7 +66,7 @@ jobs:
             -Dsonar.branch.name=main
 
       - name: Snyk Security Scan (.NET)
-        uses: snyk/actions/dotnet@master
+        uses: snyk/actions@0.4.0
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
