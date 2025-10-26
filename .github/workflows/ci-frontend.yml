@@ -59,6 +59,10 @@ jobs:
             -Dsonar.organization=ring9834
             -Dsonar.projectKey=ring9834_cicd-react-dotnet
             -Dsonar.branch.name=main
+      - name: Add Snyk ignore rules
+        run: |
+          snyk ignore --id=SNYK-JS-NTHCHECK-1586032 --reason="Will be fixed when react-scripts updates"
+          snyk ignore --id=SNYK-JS-WEBPACKDEVSERVER-10300775 --reason="Waiting for CRA to update"
       - name: Snyk Security Scan
         uses: snyk/actions@0.4.0
         env:
