@@ -1,0 +1,10 @@
+version: v1.23.0
+ignore:
+  SNYK-JS-NTHCHECK-1586032:
+    - "*":
+        reason: "Will be fixed when react-scripts updates"
+        expires: 2025-12-31T23:59:59Z
+  SNYK-JS-WEBPACKDEVSERVER-10300775:
+    - "*":
+        reason: "Waiting for CRA to update"
+        expires: 2025-12-31T23:59:59Z
