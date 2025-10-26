@@ -61,7 +61,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.organization=AntonioH's Space
+            -Dsonar.organization=AntonioHSpace
             -Dsonar.projectKey=ring9834
 
       - name: Snyk Scan
