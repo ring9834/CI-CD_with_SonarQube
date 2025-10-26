@@ -61,7 +61,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.organization=AntonioHSpace
+            -Dsonar.organization=ring9834
             -Dsonar.projectKey=ring9834_cicd-react-dotnet
             -Dsonar.branch.name=main
 
