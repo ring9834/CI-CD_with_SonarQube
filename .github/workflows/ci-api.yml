@@ -2,10 +2,10 @@ name: CI API
 on:
   push:
     branches: [ main , develop]
-    paths: [ 'BackEnd/**' , '.github/workflows/**']
+    paths: [ 'BackEnd/**' , '.github/workflows/ci-api.yml']
   pull_request:
     branches: [ main , develop]
-    paths: [ 'BackEnd/**' , '.github/workflows/**']
+    paths: [ 'BackEnd/**' , '.github/workflows/ci-api.yml']
 jobs:
   build-and-test:
     runs-on: ubuntu-latest

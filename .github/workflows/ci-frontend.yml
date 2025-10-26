@@ -2,10 +2,10 @@ name: CI Frontend
 on:
   push:
     branches: [ main , develop]
-    paths: [ 'ReactFrontEnd/**', '.github/workflows/**' ]
+    paths: [ 'ReactFrontEnd/**', '.github/workflows/ci-frontend.yml' ]
   pull_request:
     branches: [ main , develop]
-    paths: [ 'ReactFrontEnd/**', '.github/workflows/**' ]
+    paths: [ 'ReactFrontEnd/**', '.github/workflows/ci-frontend.yml' ]
 permissions:
   contents: read
   pull-requests: write 
