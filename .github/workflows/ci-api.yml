@@ -52,7 +52,7 @@ jobs:
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          files: ./BackEnd/coverage/**/coverage.opencover.xml
+          files: ./coverage/**/coverage.opencover.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
@@ -68,9 +68,8 @@ jobs:
       - name: Snyk Scan
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: |
-          curl -sSL https://raw.githubusercontent.com/snyk/actions/master/.github/workflows/snyk-dotnet.yml | \
-          docker run --rm -i -v $(pwd):/app snyk/snyk:dotnet snyk test --file=/app/MyApi.csproj
+        run:
+          docker run --rm -i -v $(pwd):/app snyk/snyk:dotnet snyk test --file=/app/BackEnd/MyApi.csproj
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
