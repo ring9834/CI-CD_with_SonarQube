@@ -62,7 +62,8 @@ jobs:
         with:
           args: >
             -Dsonar.organization=AntonioHSpace
-            -Dsonar.projectKey=ring9834
+            -Dsonar.projectKey=ring9834_cicd-react-dotnet
+            -Dsonar.branch.name=main
 
       - name: Snyk Scan
         run: |
