@@ -69,7 +69,7 @@ jobs:
         uses: snyk/actions/dotnet@v1
         with:
           command: test
-          file: ./BackEnd/MyApi.csproj
+          file: MyApi.csproj
           severity-threshold: high
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
