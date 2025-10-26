@@ -23,9 +23,9 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseCors("AllowVercel");   // Must be BEFORE UseAuthorization
+app.UseAuthorization();
 app.UseHttpsRedirection();
-
-
 app.MapControllers();
 
 app.Run();
