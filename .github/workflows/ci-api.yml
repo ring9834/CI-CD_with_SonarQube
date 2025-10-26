@@ -25,6 +25,7 @@ jobs:
         name: Test
         run: dotnet test --no-build --verbosity normal
   quality-security-scan:
+    needs: build-and-test
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -64,19 +65,26 @@ jobs:
             -Dsonar.organization=ring9834
             -Dsonar.projectKey=ring9834_cicd-react-dotnet
             -Dsonar.branch.name=main
+            
+      - name: Snyk Security Scan
+        uses: snyk/actions/dotnet@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --file=BackEnd/MyApi.csproj --severity-threshold=high
 
-      - name: Snyk Security Scan (.NET)
-        continue-on-error: true  # Don't fail the build on vulnerabilities
-        run: |
-          docker run --rm \
-            -v "$(pwd)/BackEnd:/app" \
-            -w /app \
-            -e SNYK_TOKEN=${{ secrets.SNYK_TOKEN }} \
-            snyk/snyk:dotnet snyk test --file=MyApi.sln --package-manager=nuget --severity-threshold=high
+      # - name: Snyk Security Scan (.NET)
+      #   continue-on-error: true  # Don't fail the build on vulnerabilities
+      #   run: |
+      #     docker run --rm \
+      #       -v "$(pwd)/BackEnd:/app" \
+      #       -w /app \
+      #       -e SNYK_TOKEN=${{ secrets.SNYK_TOKEN }} \
+      #       snyk/snyk:dotnet snyk test --file=MyApi.sln --package-manager=nuget --severity-threshold=high
 
 
   deploy:
-    needs: build-and-test
+    needs: quality-security-scan
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
