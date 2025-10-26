@@ -1,3 +1,7 @@
+// <copyright file="Program.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,7 +13,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowVercel", policy =>
     {
-        policy.WithOrigins("https://cicd-react-dotnet.vercel.app")  // Your Vercel URL
+        policy.WithOrigins("https://cicd-react-dotnet.vercel.app") // Your Vercel URL
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -29,4 +33,3 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
-
