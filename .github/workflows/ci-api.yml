@@ -38,7 +38,7 @@ jobs:
           dotnet-version: '9.0.x'
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore MyApi.csproj
 
       - name: Format Check
         run: dotnet format MyApi.csproj --verify-no-changes
