@@ -71,7 +71,7 @@ jobs:
         run: |
           docker run --rm -i \
             -v ${{ github.workspace }}:/app \
-            -w /app \
+            -w /app/BackEnd \
             snyk/snyk:dotnet \
             snyk test --file=MyApi.csproj --severity-threshold=high
 
