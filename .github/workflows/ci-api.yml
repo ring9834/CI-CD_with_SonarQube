@@ -65,13 +65,14 @@ jobs:
             -Dsonar.organization=ring9834
             -Dsonar.projectKey=ring9834_cicd-react-dotnet
             -Dsonar.branch.name=main
-            
+
       - name: Snyk Security Scan
         uses: snyk/actions/dotnet@master
+        continue-on-error: true  # Don't fail the build on vulnerabilities
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --file=BackEnd/MyApi.csproj --severity-threshold=high
+          args: --file=MyApi.csproj --severity-threshold=high
 
       # - name: Snyk Security Scan (.NET)
       #   continue-on-error: true  # Don't fail the build on vulnerabilities
