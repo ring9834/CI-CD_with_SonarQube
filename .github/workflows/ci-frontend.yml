@@ -14,19 +14,19 @@ permissions:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ReactFrontEnd
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - working-directory: ./ReactFrontEnd
-        run: npm ci
-      - working-directory: ./ReactFrontEnd
-        name: Run Tests
+      - run: npm ci
+      - name: Run Tests
         run: npm test
-      - working-directory: ./ReactFrontEnd
-        name: Build
+      - name: Build
         run: npm run build
   quality-security-scan:
     runs-on: ubuntu-latest

@@ -70,7 +70,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
           curl -sSL https://raw.githubusercontent.com/snyk/actions/master/.github/workflows/snyk-dotnet.yml | \
-          docker run --rm -i -v $(pwd):/app snyk/snyk:dotnet snyk test --file=MyApi.csproj
+          docker run --rm -i -v $(pwd):/app snyk/snyk:dotnet snyk test --file=/app/MyApi.csproj
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
