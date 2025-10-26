@@ -71,7 +71,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: test
-          args: --file=./BackEnd/MyApi.csproj --severity-threshold=high
+          args: --file=MyApi.csproj --package-manager=nuget --severity-threshold=high
 
   deploy:
     needs: build-and-test
