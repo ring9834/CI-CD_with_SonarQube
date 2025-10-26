@@ -59,6 +59,8 @@ jobs:
             -Dsonar.organization=ring9834
             -Dsonar.projectKey=ring9834_cicd-react-dotnet
             -Dsonar.branch.name=main
+      - name: Install Snyk CLI
+        run: npm install -g snyk
       - name: Add Snyk ignore rules
         run: |
           snyk ignore --id=SNYK-JS-NTHCHECK-1586032 --reason="Will be fixed when react-scripts updates"
