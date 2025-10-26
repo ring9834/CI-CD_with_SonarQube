@@ -65,11 +65,13 @@ jobs:
             -Dsonar.projectKey=ring9834_cicd-react-dotnet
             -Dsonar.branch.name=main
 
-      - name: Snyk Scan
+      - name: Snyk Security Scan (.NET)
+        uses: snyk/actions/dotnet@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run:
-          docker run --rm -i -v $(pwd):/app snyk/snyk:dotnet snyk test --file=MyApi.csproj
+        with:
+          args: --file=MyApi.csproj --severity-threshold=high
+
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
