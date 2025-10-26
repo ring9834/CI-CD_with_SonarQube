@@ -72,6 +72,11 @@ jobs:
         with:
           args: --file=./BackEnd/MyApi.csproj --severity-threshold=high
 
+      - name: Add Snyk ignore rules
+        run: |
+          snyk ignore --id=SNYK-JS-NTHCHECK-1586032 --reason="Will be fixed when react-scripts updates"
+          snyk ignore --id=SNYK-JS-WEBPACKDEVSERVER-10300775 --reason="Waiting for CRA to update"
+
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
