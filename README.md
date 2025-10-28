@@ -9,3 +9,7 @@ Code includes the React front end, the .net RESTFul API, and GitHub Action workf
 :bicyclist: SonarQue as the framework for Code Quality examination; 
 
 :bouncing_ball_person: Synk for security check(Vulnerability detection & remediation); 
+
+:man_cartwheeling: React front end can be automatically deployed to Vercel.
+
+:rowing_man: Web API can be automatically deployed to Render.
