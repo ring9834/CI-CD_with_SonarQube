@@ -1,5 +1,5 @@
 # CI/CD Pineline Implementation
-Code includes the React front end, the .net RESTFul API, and GitHub Action workflow scripts. it was tested to be able to go through the whole CI/CD successfuly.  
+Code includes the React front end, the .net RESTFul API, and GitHub Action workflow scripts. Successfully validated end-to-end CI/CD pipeline execution.  
 
 ## Features
 :mountain_bicyclist: GitHub as repos
